@@ -1,9 +1,3 @@
--- CAMBIAMOS DE AI A SOLO SIRIAL
--- CAMBIAMOS LOS '' --> ""
--- EN LOS PRIMARY KAY DEJAMOS SOLO UN LLAMADO DE UNA PK
--- EN REFERENCES LE QUITAMOS "" AL NOMBRE DE LA TABLA 
--- BORRAMOS LOS INDEX
--- BORRAMOS LOS CONSTRAINT 
 CREATE TABLE dispositivo_entrada (
   "id_dispositivo_entrada" SERIAL,
   "dispositivo_entrada" VARCHAR(50) NOT NULL,
@@ -119,3 +113,10 @@ REFERENCES profile(id_profile)
 ON DELETE RESTRICT ON UPDATE CASCADE;
 
 INSERT INTO profile(name_profile,state_profile)VALUES('ADMINISTRADOR',1),('USUARIO',2);
+INSERT INTO dispositivo_entrada(dispositivo_entrada,marca)VALUES('Cable','Asus'),('Inalambrico','Razer'),('Cable','Lenovo'),('Cable - Inalambrico','Acer'),('Cable - BT','Samnsung'),('Bluetooth','Generico'),('Cable - Bluetooth','RedDragon')
+INSERT INTO teclado(fk_dispositivo_entrada)VALUES(1),(2),(3)
+INSERT INTO raton(fk_dispositivo_entrada)VALUES(4),(5),(6),(7)
+INSERT INTO monitor(marca,tamanno,foto_publica_monitor)VALUES('ASUS',32,'noFoto'),('LENOVO',32,'noFoto'),('AORUS',24,'noFoto'),('SAMNSUNG',42,'noFoto'),('LG',54,'noFoto')
+INSERT INTO computadora(nombre,publico_foto_computadora,precio,fk_monitor,fk_teclado,fk_raton)VALUES('Gaming','noFoto','2500',1,1,4), ('Oficina','noFoto','1000',2,2,3),('Empresarial','noFoto','1250',3,3,2), ('Basico','noFoto','900',4,2,1)
+INSERT INTO comprador(primer_nombre,segundo_nombre,primer_apellido,segundo_apellido,documento,nombre_foto)VALUES('Andres', 'Felipe', 'Cardenas', 'Alarcon', '10246862', 'noFoto'), ('Juan', 'Pablo', 'Robles', 'Arias', '102487625', 'noFoto'), ('Luis', 'Felipe', 'Chaparro', 'Hurtado', '100245854', 'noFoto'), ('Santiago', 'Andrés', 'Arias', 'Rojo', '40476533', 'noFoto'), ('Brian', 'Hernando', 'Rodriguez', 'Rodriguez', '40476533', 'noFoto'), ('Juan', 'Sebastian', 'Fonseca', 'Fonseca', '40476533', 'noFoto')
+INSERT INTO orden(cantidad,fk_computadora,fk_comprador)VALUES(1,1,1),(2,3,3),(3,2,4),(2,4,1),(4,1,6)
