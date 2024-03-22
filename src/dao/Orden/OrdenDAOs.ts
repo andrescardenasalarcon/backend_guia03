@@ -15,10 +15,13 @@ class OrdenDAOs{
     }
 
     public static async buscarOrdenPorId(sqlBuscar: string, parametros: any, res: Response): Promise<any> {
-        await pool.one(sqlBuscar, parametros)
+        await pool.result(sqlBuscar, parametros)
             .then((dato) => {
-                console.log(dato);
-                res.status(200).json(dato);
+                if (dato.rowCount === 0) { // Si no hay resultados
+                    res.status(200).json({}); // Envía {} como respuesta
+                } else {
+                    res.status(200).json(dato.rows); // Envía los datos encontrados
+                }
             })
             .catch((mierror) => {
                 console.log(mierror);
